@@ -3,8 +3,8 @@
 // ============================================================================
 const CONFIG = {
   SUPABASE_URL: "https://eqrxhlmlznwvqtfvqxkv.supabase.co",
-  SUPABASE_PUBLISHABLE_KEY: "TEMPEL_PUBLISHABLE_KEY_KAMU_DI_SINI",
-  // Isi URL webhook n8n setelah Workflow 2 AI CS siap di VPS Sumopod (opsional untuk tahap awal)
+  SUPABASE_PUBLISHABLE_KEY:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxcnhobG1sem53dnF0ZnZxeGt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU2MjkzMjQsImV4cCI6MjExMTIwNTMyNH0.w6llBOlsnkhQjYPejJWLrJqeepw_TAoY8BqIK3pgvDQ", // tempel kunci anon public (eyJ...) di sini
   N8N_AI_CS_WEBHOOK_URL: "",
 };
 
