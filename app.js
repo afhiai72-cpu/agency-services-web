@@ -4,7 +4,7 @@
 const CONFIG = {
   SUPABASE_URL: "https://eqrxhlmlznwvqtfvqxkv.supabase.co",
   SUPABASE_PUBLISHABLE_KEY:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxcnhobG1sem53dnF0ZnZxeGt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU2MjkzMjQsImV4cCI6MjExMTIwNTMyNH0.w6llBOlsnkhQjYPejJWLrJqeepw_TAoY8BqIK3pgvDQ", // tempel kunci anon public (eyJ...) di sini
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxcnhobG1sem53dnF0ZnZxeGt2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU2MjkzMjQsImV4cCI6MjExMTIwNTMyNH0.w6llBOlsnkhQjYPejJWLrJqeepw_TAoY8BqIK3pgvDQ",
   N8N_AI_CS_WEBHOOK_URL: "/api/ai-cs",
 };
 
