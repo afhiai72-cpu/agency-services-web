@@ -437,11 +437,43 @@ function toggleAiWidget(forceOpen = null) {
   panel.classList.toggle("hidden", !shouldOpen);
 }
 
+function formatChatMarkdown(text) {
+  let html = escapeHtml(String(text || ""));
+
+  // Ubah **teks** menjadi <strong>teks</strong>
+  html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+  // Ubah tautan https://... menjadi link aktif
+  html = html.replace(
+    /(https?:\/\/[^\s<]+)/g,
+    '<a href="$1" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; word-break: break-all;">$1</a>',
+  );
+
+  // Ubah mailto:... atau alamat email biasa menjadi link email aktif
+  html = html.replace(
+    /(?:mailto:)?([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(?:\?([^\s<]+))?/g,
+    (_, email, query) => {
+      const href = query
+        ? `mailto:${email}?${query}`
+        : `mailto:${email}?subject=Referensi%20Foto%20Produk%20%26%20Karakter%20-%20Afhi%20Creative`;
+      return `<a href="${href}" style="color: inherit; text-decoration: underline; word-break: break-all;">${email}</a>`;
+    },
+  );
+
+  // Ubah baris baru \n menjadi <br>
+  html = html.replace(/\n/g, "<br>");
+  return html;
+}
+
 function appendAiMessage(text, sender = "bot") {
   const box = document.getElementById("aiMessages");
   const div = document.createElement("div");
   div.className = `ai-msg ${sender}`;
-  div.textContent = text;
+  if (sender === "bot") {
+    div.innerHTML = formatChatMarkdown(text);
+  } else {
+    div.textContent = text;
+  }
   box.appendChild(div);
   box.scrollTop = box.scrollHeight;
 }
@@ -481,12 +513,14 @@ async function sendAiQuestion(question) {
       throw new Error(`HTTP ${res.status}: ${rawText.slice(0, 160)}`);
     }
 
+    const cleanedRaw = rawText.trim().replace(/^=+/, "");
+
     let data = {};
-    if (rawText) {
+    if (cleanedRaw) {
       try {
-        data = JSON.parse(rawText);
+        data = JSON.parse(cleanedRaw);
       } catch {
-        data = { reply: rawText };
+        data = { reply: cleanedRaw };
       }
     }
 
