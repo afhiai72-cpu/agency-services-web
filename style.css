@@ -802,75 +802,52 @@ body {
   border-color: #60a5fa;
 }
 
-/* === Tombol Gelembung Chat Mengikuti Referensi === */
+/* === Tombol Chat Widget Gaya Shopee (Warna Biru) === */
 .ai-fab {
   position: fixed;
   right: 20px;
-  bottom: 18px;
+  bottom: 24px;
   z-index: 900;
-  width: 156px;
-  height: 108px;
-  padding: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid #1d4ed8;
+  border-radius: 8px;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+  cursor: pointer;
   transition:
-    transform 0.16s ease,
-    filter 0.16s ease;
+    background-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .ai-fab:hover {
-  transform: translateY(-3px);
-  filter: drop-shadow(0 10px 18px rgba(15, 23, 42, 0.16));
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.32);
 }
 
-.ai-bubble-svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  filter: drop-shadow(0 6px 14px rgba(15, 23, 42, 0.12));
+.ai-fab:active {
+  transform: translateY(0);
 }
 
-.ai-bubble-svg path {
-  fill: #ffffff;
-  stroke: #0f172a;
-  stroke-width: 5.5;
-  stroke-linejoin: round;
-  transition:
-    fill 0.16s ease,
-    stroke 0.16s ease;
-}
-
-.ai-fab:hover .ai-bubble-svg path {
-  fill: #f8fafc;
-}
-
-.ai-bubble-text {
-  position: relative;
-  z-index: 1;
-  margin-top: -6px;
-  color: #0f172a;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
-  line-height: 1;
-  pointer-events: none;
+.ai-fab-icon {
+  flex-shrink: 0;
+  color: #ffffff;
 }
 
 @media (max-width: 640px) {
   .ai-fab {
-    right: 14px;
-    bottom: 14px;
-    width: 138px;
-    height: 96px;
-  }
-
-  .ai-bubble-text {
-    font-size: 0.84rem;
+    right: 16px;
+    bottom: calc(44px + env(safe-area-inset-bottom, 0px));
+    padding: 9px 15px;
+    font-size: 0.88rem;
   }
 }
