@@ -802,6 +802,17 @@ body {
   border-color: #60a5fa;
 }
 
+.asset-btn--email {
+  border-color: #fca5a5;
+  background-color: #fef2f2;
+  color: #b91c1c;
+}
+
+.asset-btn--email:hover {
+  background-color: #fee2e2;
+  border-color: #f87171;
+}
+
 /* === Tombol Chat Widget Gaya Shopee (Warna Biru) === */
 .ai-fab {
   position: fixed;
