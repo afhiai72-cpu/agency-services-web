@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Katalog Jasa & Otomatisasi | Produksi Video AI, Web, Aplikasi & n8n
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#" class="brand">Afhi Studio</a>
+        <nav class="nav-links">
+          <a href="#services-section">Layanan & Paket</a>
+          <a href="#how-it-works">Alur Kerja</a>
+          <button type="button" class="btn btn-ghost btn-sm" id="openAiCsBtn">
+            Tanya AI CS
+          </button>
+        </nav>
+        <div class="currency-toggle" role="group" aria-label="Pilih mata uang">
+          <button type="button" class="curr-btn active" data-curr="IDR">
+            IDR
+          </button>
+          <button type="button" class="curr-btn" data-curr="USD">USD</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <span class="eyebrow"
+            >Produksi Video AI • Website • Aplikasi • Otomatisasi n8n</span
+          >
+          <h1>
+            Solusi digital & otomatisasi siap pakai untuk mempercepat
+            pertumbuhan bisnis.
+          </h1>
+          <p class="hero-desc">
+            Pilih kategori layanan, sesuaikan opsi add-on sesuai kebutuhan
+            proyek, hitung estimasi biaya dan waktu secara transparan, lalu
+            lanjutkan ke pemesanan.
+          </p>
+          <div class="hero-actions">
+            <a href="#services-section" class="btn btn-primary"
+              >Lihat Paket Jasa</a
+            >
+            <button type="button" class="btn btn-secondary" id="heroAiCsBtn">
+              Konsultasi dengan AI CS
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="services-section" class="catalog-section">
+        <div class="container">
+          <div class="section-head">
+            <h2>Kategori Layanan & Paket</h2>
+            <p>Data paket dan add-on dimuat langsung dari database Supabase.</p>
+          </div>
+
+          <div id="categoryTabs" class="category-tabs" role="tablist"></div>
+          <div id="statusBanner" class="status-banner hidden"></div>
+          <div id="packagesGrid" class="packages-grid"></div>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="process-section">
+        <div class="container">
+          <div class="section-head">
+            <h2>Alur Pemesanan</h2>
+            <p>
+              Sederhana, terdokumentasi, dan terintegrasi dengan notifikasi
+              otomatis.
+            </p>
+          </div>
+          <div class="steps-grid">
+            <div class="step-card">
+              <span class="step-num">01</span>
+              <h3>Pilih Paket & Add-On</h3>
+              <p>
+                Tentukan paket utama dan tambahkan durasi, domain, fitur, atau
+                instalasi VPS sesuai kebutuhan.
+              </p>
+            </div>
+            <div class="step-card">
+              <span class="step-num">02</span>
+              <h3>Isi Detail & Checkout</h3>
+              <p>
+                Lengkapi nama, email, nomor WhatsApp, dan ringkasan brief untuk
+                mencatat pesanan secara aman.
+              </p>
+            </div>
+            <div class="step-card">
+              <span class="step-num">03</span>
+              <h3>Pembayaran & Konfirmasi</h3>
+              <p>
+                Selesaikan pembayaran lalu terima konfirmasi pesanan serta
+                panduan pengumpulan aset proyek.
+              </p>
+            </div>
+            <div class="step-card">
+              <span class="step-num">04</span>
+              <h3>Pengerjaan & Revisi</h3>
+              <p>
+                Tim mengerjakan sesuai estimasi waktu dan kuota revisi minor
+                yang tercantum pada paket.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>
+          © <span id="yearSpan"></span> Afhi Studio. Seluruh hak cipta
+          dilindungi.
+        </p>
+        <p class="footer-note">
+          Tema terang minimalis • Terhubung ke Supabase & n8n
+        </p>
+      </div>
+    </footer>
+
+    <!-- MODAL CHECKOUT + KALKULATOR ADD-ON -->
+    <div id="checkoutModal" class="modal-backdrop hidden" aria-hidden="true">
+      <div
+        class="modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="checkoutTitle"
+      >
+        <div class="modal-header">
+          <div>
+            <span id="checkoutCategoryLabel" class="modal-eyebrow"
+              >Kategori</span
+            >
+            <h3 id="checkoutTitle">Checkout Paket</h3>
+          </div>
+          <button
+            type="button"
+            class="icon-close"
+            id="closeCheckoutBtn"
+            aria-label="Tutup modal"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="modal-body checkout-grid">
+          <div class="checkout-left">
+            <div class="block-box">
+              <h4>1. Opsi Add-On Tambahan</h4>
+              <div id="addonsList" class="addons-list"></div>
+            </div>
+
+            <form id="orderForm" class="block-box">
+              <h4>2. Data Klien & Brief Singkat</h4>
+              <div class="field-group">
+                <label for="clientName">Nama Lengkap *</label>
+                <input
+                  type="text"
+                  id="clientName"
+                  name="clientName"
+                  required
+                  placeholder="Contoh: Budi Santoso"
+                />
+              </div>
+              <div class="field-row">
+                <div class="field-group">
+                  <label for="clientEmail">Email *</label>
+                  <input
+                    type="email"
+                    id="clientEmail"
+                    name="clientEmail"
+                    required
+                    placeholder="nama@email.com"
+                  />
+                </div>
+                <div class="field-group">
+                  <label for="clientPhone">Nomor WhatsApp *</label>
+                  <input
+                    type="tel"
+                    id="clientPhone"
+                    name="clientPhone"
+                    required
+                    placeholder="6281234567890"
+                  />
+                </div>
+              </div>
+              <div class="field-group">
+                <label for="clientCompany"
+                  >Nama Brand / Perusahaan (Opsional)</label
+                >
+                <input
+                  type="text"
+                  id="clientCompany"
+                  name="clientCompany"
+                  placeholder="Contoh: PT Maju Jaya"
+                />
+              </div>
+              <div class="field-group">
+                <label for="projectBrief"
+                  >Ringkasan Kebutuhan / Brief Awal</label
+                >
+                <textarea
+                  id="projectBrief"
+                  name="projectBrief"
+                  rows="3"
+                  placeholder="Jelaskan target proyek, referensi, atau jadwal yang diharapkan..."
+                ></textarea>
+              </div>
+
+              <div id="orderFeedback" class="order-feedback hidden"></div>
+
+              <button
+                type="submit"
+                id="submitOrderBtn"
+                class="btn btn-primary btn-full"
+              >
+                Buat Pesanan Sekarang
+              </button>
+            </form>
+          </div>
+
+          <aside class="checkout-right">
+            <div class="summary-card">
+              <h4>Ringkasan Pesanan</h4>
+              <div class="summary-row">
+                <span id="summaryPackageName">Paket Terpilih</span>
+                <strong id="summaryPackagePrice">Rp 0</strong>
+              </div>
+              <div id="summaryAddonsContainer" class="summary-addons"></div>
+              <hr class="divider" />
+              <div class="summary-row">
+                <span>Estimasi Waktu</span>
+                <strong id="summaryDays">0 hari</strong>
+              </div>
+              <div class="summary-row total-row">
+                <span>Total Pembayaran</span>
+                <strong id="summaryGrandTotal">Rp 0</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- WIDGET AI CUSTOMER SERVICE -->
+    <button
+      type="button"
+      id="aiWidgetFab"
+      class="ai-fab"
+      aria-label="Buka AI Customer Service"
+    >
+      AI CS
+    </button>
+
+    <div
+      id="aiWidgetPanel"
+      class="ai-panel hidden"
+      role="dialog"
+      aria-label="Asisten AI Layanan"
+    >
+      <div class="ai-panel-header">
+        <div>
+          <strong>Asisten Layanan AI</strong>
+          <p>Tanya harga paket, add-on, revisi, atau alur order</p>
+        </div>
+        <button
+          type="button"
+          id="closeAiWidgetBtn"
+          class="icon-close"
+          aria-label="Tutup chat AI"
+        >
+          ✕
+        </button>
+      </div>
+
+      <div class="ai-quick-prompts">
+        <button
+          type="button"
+          class="quick-chip"
+          data-q="Apa saja paket video AI dan berapa estimasi pengerjaannya?"
+        >
+          Paket Video AI
+        </button>
+        <button
+          type="button"
+          class="quick-chip"
+          data-q="Bagaimana cara menambahkan add-on saat checkout dan sistem revisinya?"
+        >
+          Add-On & Revisi
+        </button>
+        <button
+          type="button"
+          class="quick-chip"
+          data-q="Apakah bisa konsultasi untuk proyek custom di luar paket Pro?"
+        >
+          Proyek Custom
+        </button>
+      </div>
+
+      <div id="aiMessages" class="ai-messages">
+        <div class="ai-msg bot">
+          Halo! Saya asisten informasi layanan. Silakan tanyakan detail paket
+          Video AI, Website, Aplikasi, atau Otomatisasi n8n.
+        </div>
+      </div>
+
+      <form id="aiChatForm" class="ai-input-form">
+        <input
+          type="text"
+          id="aiChatInput"
+          placeholder="Tulis pertanyaanmu..."
+          autocomplete="off"
+          required
+        />
+        <button type="submit" class="btn btn-primary btn-sm">Kirim</button>
+      </form>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
