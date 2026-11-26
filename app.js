@@ -475,14 +475,33 @@ async function sendAiQuestion(question) {
         currency: state.currency,
       }),
     });
-    const data = await res.json();
+
+    const rawText = await res.text();
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: ${rawText.slice(0, 160)}`);
+    }
+
+    let data = {};
+    if (rawText) {
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        data = { reply: rawText };
+      }
+    }
+
+    const payload = Array.isArray(data) ? data[0] || {} : data;
+    const replyText =
+      payload.reply || payload.output || payload.text || payload.message || "";
+
     thinkingEl.remove();
     appendAiMessage(
-      data.reply ||
+      replyText ||
         "Maaf, saya belum dapat memproses pertanyaan tersebut saat ini.",
       "bot",
     );
   } catch (err) {
+    console.error("AI CS Webhook Error:", err);
     thinkingEl.remove();
     appendAiMessage(
       "Terjadi gangguan koneksi ke layanan AI. Silakan coba lagi beberapa saat.",
