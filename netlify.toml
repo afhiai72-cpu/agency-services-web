@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/api/ai-cs"
+  to = "http://43.173.48.106:5678/webhook/ai-cs"
+  status = 200
+  force = true
